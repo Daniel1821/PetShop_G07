@@ -49,3 +49,4 @@ public class Usuario {
     @Column(name = "fecha_modificacion", insertable = false, updatable = false)
     private LocalDateTime fechaModificacion;
 }
+

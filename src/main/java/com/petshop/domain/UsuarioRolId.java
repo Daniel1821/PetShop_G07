@@ -1,3 +1,4 @@
+
 package com.petshop.domain;
 
 import jakarta.persistence.Embeddable;

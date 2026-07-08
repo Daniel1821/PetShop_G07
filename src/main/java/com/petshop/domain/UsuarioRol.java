@@ -8,22 +8,24 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tipo_mascota")
+@Table(name = "usuario_rol")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TipoMascota {
+public class UsuarioRol {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_mascota")
-    private Integer idTipoMascota;
+    @EmbeddedId
+    private UsuarioRolId id;
 
-    @Column(name = "descripcion", nullable = false, unique = true, length = 30)
-    private String descripcion;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idUsuario")
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
-    @Column(name = "activo")
-    private Boolean activo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idRol")
+    @JoinColumn(name = "id_rol")
+    private Rol rol;
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
