@@ -8,7 +8,16 @@
 
 <body class="container mt-5">
 
-    <h1 class="mb-4">PetShop</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">PetShop</h1>
+        <div th:if="${usuarioAutenticado}" class="d-flex align-items-center gap-2">
+            <span class="text-muted" th:text="|Sesión: ${usuarioAutenticado}|">Sesión</span>
+            <form th:action="@{/logout}" method="post" class="m-0">
+                <button class="btn btn-outline-danger" type="submit">Cerrar sesión</button>
+            </form>
+        </div>
+        <a th:unless="${usuarioAutenticado}" class="btn btn-outline-primary" th:href="@{/login}">Iniciar sesión</a>
+    </div>
 
     <div class="list-group">
         <a href="/productos" class="list-group-item list-group-item-action">Productos</a>
