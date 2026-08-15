@@ -22,8 +22,20 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<Producto> getProductosActivos() {
+        return productoRepository.findByActivoTrueOrderByDescripcionAsc();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Producto getProducto(Producto producto) {
         return productoRepository.findById(producto.getIdProducto()).orElse(null);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Producto getProductoActivo(Integer idProducto) {
+        return productoRepository.findByIdProductoAndActivoTrue(idProducto).orElse(null);
     }
 
     @Override

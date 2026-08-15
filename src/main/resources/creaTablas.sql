@@ -238,9 +238,9 @@ insert into rol (rol) values ('ADMIN'), ('VENDEDOR'), ('CLIENTE');
 
 -- Inserción de usuarios
 INSERT INTO usuario (username,password,nombre, apellidos, correo, telefono,ruta_imagen,activo) VALUES
-('asanchez','$2a$10$P1.w58XvnaYQUQgZUCk4aO/RTRl8EValluCqB3S2VMLTbRt.tlre.','Antoine', 'Sánchez Zárate', 'asanchez@petshop.com', '8811-2345', 'https://randomuser.me/api/portraits/men/11.jpg', true),
-('dberrocal','$2a$10$GkEj.ZzmQa/aEfDmtLIh3udIH5fMphx/35d0EYeqZL5uzgCJ0lQRi','Daniel', 'Berrocal Sánchez', 'dberrocal@petshop.com', '8822-3456', 'https://randomuser.me/api/portraits/men/22.jpg', true),
-('mrojas','$2a$10$koGR7eS22Pv5KdaVJKDcge04ZB53iMiw76.UjHPY.XyVYlYqXnPbO','María', 'Rojas Vargas', 'mrojas@gmail.com', '8833-4567', 'https://randomuser.me/api/portraits/women/33.jpg', true);
+('daniel','$2a$10$oY2VW9giUKfbbbO6ph0lgOB0MZ9LgDHwDpWImYP4oMiDUjwTK8nTm','Daniel', 'Sánchez Zárate', 'asanchez@petshop.com', '8811-2345', 'https://randomuser.me/api/portraits/men/11.jpg', true),
+('carlos','$2a$10$OsB0f/AYxNjsswRLYUKOwOxzups2gJWfjx0xJGJTbydYA4iSmv2pS','Carlos', 'Berrocal Sánchez', 'dberrocal@petshop.com', '8822-3456', 'https://randomuser.me/api/portraits/men/22.jpg', true),
+('juan','$2a$10$HkykIA8PTKb8urq4bTc.OOW2Wij9RvSHo7M5DbCdq8MBK8D7llQBG','Juan', 'Rojas Vargas', 'mrojas@gmail.com', '8833-4567', 'https://randomuser.me/api/portraits/women/33.jpg', true);
 
 -- Asignación de roles a usuarios
 insert into usuario_rol (id_usuario, id_rol) values
