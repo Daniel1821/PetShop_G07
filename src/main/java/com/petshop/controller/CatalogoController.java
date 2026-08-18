@@ -32,6 +32,12 @@ public class CatalogoController {
         boolean esAdmin = authentication != null && authentication.getAuthorities().stream()
                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
         model.addAttribute("esAdmin", esAdmin);
+        boolean esVendedor = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_VENDEDOR"));
+        boolean esCliente = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_CLIENTE"));
+        model.addAttribute("esVendedor", esVendedor);
+        model.addAttribute("esCliente", esCliente);
         return "catalogo/listado";
     }
 

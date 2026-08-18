@@ -244,7 +244,7 @@ INSERT INTO usuario (username,password,nombre, apellidos, correo, telefono,ruta_
 
 -- Asignación de roles a usuarios
 insert into usuario_rol (id_usuario, id_rol) values
- (1,1), (1,2), (1,3), (2,2), (2,3), (3,3);
+ (1,1), (1,2), (1,3), (2,2), (3,3);
 
 -- Inserción de direcciones
 INSERT INTO direccion (id_usuario,provincia,canton,distrito,senas,telefono_contacto,predeterminada) VALUES

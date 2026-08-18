@@ -15,6 +15,10 @@ public class IndexController {
             model.addAttribute("usuarioAutenticado", authentication.getName());
             model.addAttribute("esAdmin", authentication.getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN")));
+            model.addAttribute("esVendedor", authentication.getAuthorities().stream()
+                    .anyMatch(authority -> authority.getAuthority().equals("ROLE_VENDEDOR")));
+            model.addAttribute("esCliente", authentication.getAuthorities().stream()
+                    .anyMatch(authority -> authority.getAuthority().equals("ROLE_CLIENTE")));
         }
         return "index";
     }
