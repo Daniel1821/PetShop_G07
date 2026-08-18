@@ -266,23 +266,28 @@ INSERT INTO categoria (descripcion,ruta_imagen,activo) VALUES
 
 -- Inserción de productos
 INSERT INTO producto (id_categoria,id_tipo_mascota,descripcion,detalle,precio,existencias,calificacion,ruta_imagen,activo) VALUES
-(1,1,'Croquetas Premium Perro Adulto','Alimento balanceado para perros adultos de todas las razas, formulado con proteína de alta calidad.',18500,25,4.5,'https://images.unsplash.com/photo-1568640347023-a616a30bc3bd',true),
-(1,2,'Alimento Gato Esterilizado','Croquetas especiales para gatos esterilizados, control de peso y bola de pelo.',16200,30,4.2,'https://images.unsplash.com/photo-1592194996308-7b43878e84a6',true),
-(1,4,'Alimento en Escamas para Peces','Alimento balanceado en escamas para peces tropicales de agua dulce.',3200,50,4.0,'https://images.unsplash.com/photo-1524704796725-9fc3044a58b2',true),
-(2,1,'Pelota de Goma Resistente','Juguete de goma resistente para masticar, ideal para perros medianos y grandes.',5400,40,4.7,'https://images.unsplash.com/photo-1591946614720-90a587da4a36',true),
-(2,2,'Ratón de Peluche con Cascabel','Juguete interactivo para gatos con relleno de catnip y cascabel.',3100,35,4.3,'https://images.unsplash.com/photo-1592194996308-7b43878e84a6',true),
-(3,1,'Correa Retráctil 5m','Correa retráctil resistente hasta 25kg, con freno de seguridad.',12800,20,4.6,'https://images.unsplash.com/photo-1601758228041-3caa4b7b2fd8',true),
-(3,3,'Jaula para Ave Mediana','Jaula de metal con comederos y percha incluida para aves medianas.',34500,10,4.1,'https://images.unsplash.com/photo-1552728089-57bdde30beb3',true),
-(3,5,'Terrario de Vidrio 40L','Terrario de vidrio con tapa ventilada, ideal para reptiles pequeños.',42000,8,4.4,'https://images.unsplash.com/photo-1585110396000-c9ffd4e6b308',true),
-(4,1,'Shampoo Antipulgas Perro','Shampoo medicado antipulgas y garrapatas para perros.',7900,22,4.3,'https://images.unsplash.com/photo-1601758064978-58c5a3b5a3b6',true),
-(4,6,'Cepillo para Conejo','Cepillo suave especial para el cuidado del pelaje de conejos.',4500,15,4.0,'https://images.unsplash.com/photo-1585846888147-303d39253226',true);
+(1,1,'Croquetas Premium Perro Adulto','Alimento balanceado para perros adultos de todas las razas, formulado con proteína de alta calidad.',18500,25,4.5,'/images/croquetas-perro.png',true),
+(1,2,'Alimento Gato Esterilizado','Croquetas especiales para gatos esterilizados, control de peso y bola de pelo.',16200,30,4.2,'/images/croquetas-gato.png',true),
+(1,4,'Alimento en Escamas para Peces','Alimento balanceado en escamas para peces tropicales de agua dulce.',3200,50,4.0,'/images/alimento-peces.png',true),
+(2,1,'Pelota de Goma Resistente','Juguete de goma resistente para masticar, ideal para perros medianos y grandes.',5400,40,4.7,'/images/pelota-goma.png',true),
+(2,2,'Ratón de Peluche con Cascabel','Juguete interactivo para gatos con relleno de catnip y cascabel.',3100,35,4.3,'/images/raton-peluche.png',true),
+(3,1,'Correa Retráctil 5m','Correa retráctil resistente hasta 25kg, con freno de seguridad.',12800,20,4.6,'/images/correa-retractil.png',true),
+(3,3,'Jaula para Ave Mediana','Jaula de metal con comederos y percha incluida para aves medianas.',34500,10,4.1,'/images/jaula-ave.png',true),
+(3,5,'Terrario de Vidrio 40L','Terrario de vidrio con tapa ventilada, ideal para reptiles pequeños.',42000,8,4.4,'/images/terrario-vidrio.png',true),
+(4,1,'Shampoo Antipulgas Perro','Shampoo medicado antipulgas y garrapatas para perros.',7900,22,4.3,'/images/shampoo-antipulgas.png',true),
+(4,6,'Cepillo para Conejo','Cepillo suave especial para el cuidado del pelaje de conejos.',4500,15,4.0,'/images/cepillo-conejo.png',true),
+(3,1,'Cama Acolchada para Perro','Cama suave y resistente para el descanso de perros medianos.',22000,18,4.6,'/images/cama-perro.png',true),
+(3,2,'Arenero Abierto para Gato','Arenero de plástico con borde alto y pala incluida para facilitar la limpieza.',9800,16,4.4,'/images/arenero-gato.png',true),
+(3,2,'Bebedero Automático para Mascotas','Fuente de agua continua con tazón de acero inoxidable para perros y gatos.',17500,12,4.5,'/images/bebedero-automatico.png',true);
 
 -- Inserción de imágenes de producto adicionales
 INSERT INTO producto_imagen (id_producto,ruta_imagen,orden) VALUES
-(1,'https://images.unsplash.com/photo-1568640347023-a616a30bc3bd',1),
-(1,'https://images.unsplash.com/photo-1568640347023-a616a30bc3be',2),
-(4,'https://images.unsplash.com/photo-1591946614720-90a587da4a36',1),
-(6,'https://images.unsplash.com/photo-1601758228041-3caa4b7b2fd8',1);
+(1,'/images/croquetas-perro.png',1),
+(4,'/images/pelota-goma.png',1),
+(6,'/images/correa-retractil.png',1),
+(11,'/images/cama-perro.png',1),
+(12,'/images/arenero-gato.png',1),
+(13,'/images/bebedero-automatico.png',1);
 
 -- Inserción de carrito de compras
 INSERT INTO carrito_detalle (id_usuario,id_producto,cantidad) VALUES
