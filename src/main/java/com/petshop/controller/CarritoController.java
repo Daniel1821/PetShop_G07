@@ -3,6 +3,7 @@ package com.petshop.controller;
 import com.petshop.domain.CarritoDetalle;
 import com.petshop.service.CarritoService;
 import com.petshop.service.PedidoService;
+import com.petshop.service.DireccionService;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.security.core.Authentication;
@@ -18,13 +19,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CarritoController {
     private final CarritoService carritoService;
     private final PedidoService pedidoService;
-    public CarritoController(CarritoService carritoService, PedidoService pedidoService) { this.carritoService = carritoService; this.pedidoService = pedidoService; }
+    private final DireccionService direccionService;
+    public CarritoController(CarritoService carritoService, PedidoService pedidoService, DireccionService direccionService) { this.carritoService = carritoService; this.pedidoService = pedidoService; this.direccionService = direccionService; }
 
     @GetMapping("/carrito")
     public String verCarrito(Authentication auth, Model model) {
         List<CarritoDetalle> detalles = carritoService.obtenerCarrito(auth.getName());
         BigDecimal total = detalles.stream().map(d -> d.getProducto().getPrecio().multiply(BigDecimal.valueOf(d.getCantidad()))).reduce(BigDecimal.ZERO, BigDecimal::add);
-        model.addAttribute("detalles", detalles); model.addAttribute("total", total);
+        model.addAttribute("detalles", detalles); model.addAttribute("total", total); model.addAttribute("direcciones", direccionService.obtenerDirecciones(auth.getName()));
         return "carrito/listado";
     }
     @PostMapping("/carrito/agregar")
@@ -47,11 +49,11 @@ public class CarritoController {
     }
 
     @PostMapping("/carrito/finalizar")
-    public String finalizar(Authentication auth, RedirectAttributes flash) {
+    public String finalizar(Authentication auth, @RequestParam(required = false) Integer idDireccion, RedirectAttributes flash) {
         try {
-            var pedido = pedidoService.finalizarCompra(auth.getName());
-            flash.addFlashAttribute("exito", "Compra realizada con éxito. Tu pedido #" + pedido.getIdPedido() + " está pendiente.");
-            return "redirect:/carrito";
+            var pedido = pedidoService.finalizarCompra(auth.getName(), idDireccion);
+            flash.addFlashAttribute("exito", "Compra realizada con éxito.");
+            return "redirect:/pedidos/" + pedido.getIdPedido() + "/comprobante";
         } catch (IllegalStateException e) {
             flash.addFlashAttribute("error", e.getMessage());
             return "redirect:/carrito";

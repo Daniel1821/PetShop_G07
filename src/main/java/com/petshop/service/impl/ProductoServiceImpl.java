@@ -28,6 +28,16 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<Producto> buscarProductosActivos(String busqueda, Integer idCategoria) {
+        String termino = busqueda == null ? null : busqueda.trim();
+        if (termino != null && termino.isEmpty()) {
+            termino = null;
+        }
+        return productoRepository.buscarProductosActivos(termino, idCategoria);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Producto getProducto(Producto producto) {
         return productoRepository.findById(producto.getIdProducto()).orElse(null);
     }

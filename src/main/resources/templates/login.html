@@ -13,6 +13,7 @@
                 <h1 class="h3 text-center mb-4">PetShop</h1>
                 <div th:if="${param.error}" class="alert alert-danger">Usuario o contraseña inválidos.</div>
                 <div th:if="${param.logout}" class="alert alert-success">Sesión cerrada correctamente.</div>
+                <div th:if="${exito}" class="alert alert-success" th:text="${exito}"></div>
                 <form th:action="@{/login}" method="post">
                     <div class="mb-3">
                         <label class="form-label" for="username">Usuario</label>
@@ -24,7 +25,9 @@
                     </div>
                     <button class="btn btn-primary w-100" type="submit">Ingresar</button>
                 </form>
-                <a class="d-block text-center mt-3" th:href="@{/}">Volver al inicio</a>
+                <a class="d-block text-center mt-3" th:href="@{/registro}">Crear una cuenta</a>
+                <a class="d-block text-center mt-2" th:href="@{/recuperar-contrasena}">¿Olvidaste tu contraseña?</a>
+                <a class="d-block text-center mt-2" th:href="@{/}">Volver al inicio</a>
             </div>
         </section>
     </main>

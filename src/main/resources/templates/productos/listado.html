@@ -16,6 +16,11 @@
     Agregar producto
 </a>
 
+<div th:if="${!#lists.isEmpty(productosStockBajo)}" class="alert alert-warning">
+    <strong>Stock bajo:</strong>
+    <span th:each="producto, estado : ${productosStockBajo}" th:text="|${producto.descripcion} (${producto.existencias})${estado.last ? '' : ', '}|"></span>
+</div>
+
 <table class="table table-striped table-hover">
 
     <thead>

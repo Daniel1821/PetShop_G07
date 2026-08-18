@@ -12,4 +12,5 @@ public interface UsuarioService {
     public void save(Usuario usuario);
     
     public void delete(Usuario usuario);
+    public void restablecerPassword(String correo, String password);
 }

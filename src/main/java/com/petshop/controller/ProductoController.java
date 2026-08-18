@@ -22,6 +22,9 @@ public class ProductoController {
     public String listado(Model model) {
         var productos = productoService.getProductos();
         model.addAttribute("productos", productos);
+        model.addAttribute("productosStockBajo", productos.stream()
+                .filter(producto -> producto.getExistencias() != null && producto.getExistencias() <= 5)
+                .toList());
         return "productos/listado";
     }
 

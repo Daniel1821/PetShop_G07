@@ -6,6 +6,8 @@ import java.util.List;
 public interface CategoriaService {
     
     public List<Categoria> getCategorias();
+
+    public List<Categoria> getCategoriasActivas();
     
     public Categoria getCategoria(Categoria categoria);
     

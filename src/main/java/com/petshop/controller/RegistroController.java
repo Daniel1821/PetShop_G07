@@ -1,0 +1,4 @@
+package com.petshop.controller;
+import com.petshop.service.RegistroService;
+import org.springframework.stereotype.Controller;import org.springframework.web.bind.annotation.*;import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+@Controller public class RegistroController {private final RegistroService s;public RegistroController(RegistroService s){this.s=s;}@GetMapping("/registro") public String form(){return "registro";}@PostMapping("/registro") public String save(@RequestParam String username,@RequestParam String nombre,@RequestParam String apellidos,@RequestParam String correo,@RequestParam String password,RedirectAttributes f){try{s.registrar(username,nombre,apellidos,correo,password);f.addFlashAttribute("exito","Cuenta creada.");return "redirect:/login";}catch(IllegalArgumentException e){f.addFlashAttribute("error",e.getMessage());return "redirect:/registro";}}}

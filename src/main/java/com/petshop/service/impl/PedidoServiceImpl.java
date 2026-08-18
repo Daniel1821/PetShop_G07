@@ -14,6 +14,8 @@ import com.petshop.repository.UsuarioRepository;
 import com.petshop.service.PedidoService;
 import java.math.BigDecimal;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,11 +38,14 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     @Transactional
-    public Pedido finalizarCompra(String username) {
+    public Pedido finalizarCompra(String username, Integer idDireccion) {
         Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalStateException("Usuario no encontrado."));
-        Direccion direccion = direccionRepository.findFirstByUsuarioUsernameAndPredeterminadaTrue(username)
-                .orElseThrow(() -> new IllegalStateException("Debes registrar una dirección predeterminada antes de comprar."));
+        Direccion direccion = idDireccion == null
+                ? direccionRepository.findFirstByUsuarioUsernameAndPredeterminadaTrue(username)
+                        .orElseThrow(() -> new IllegalStateException("Debes registrar una dirección antes de comprar."))
+                : direccionRepository.findByIdDireccionAndUsuarioUsername(idDireccion, username)
+                        .orElseThrow(() -> new IllegalStateException("La dirección seleccionada no es válida."));
         List<CarritoDetalle> carrito = carritoDetalleRepository.findCarritoByUsername(username);
         if (carrito.isEmpty()) {
             throw new IllegalStateException("Tu carrito está vacío.");
@@ -71,6 +76,44 @@ public class PedidoServiceImpl implements PedidoService {
         Pedido pedidoGuardado = pedidoRepository.save(pedido);
         carritoDetalleRepository.deleteAll(carrito);
         return pedidoGuardado;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Pedido> obtenerPedidosCliente(String username) {
+        return pedidoRepository.findByUsuarioUsernameOrderByFechaDesc(username);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Pedido> obtenerPedidos() {
+        return pedidoRepository.findAllWithUsuarioOrderByFechaDesc();
+    }
+
+    @Override
+    @Transactional
+    public void actualizarEstado(Integer idPedido, Pedido.Estado estado) {
+        if (estado == null) {
+            throw new IllegalArgumentException("Debes seleccionar un estado válido.");
+        }
+        Pedido pedido = pedidoRepository.findById(idPedido)
+                .orElseThrow(() -> new IllegalArgumentException("El pedido no existe."));
+        pedido.setEstado(estado);
+        pedidoRepository.save(pedido);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Pedido> obtenerPedidosEntre(LocalDate inicio, LocalDate fin) {
+        if (inicio == null || fin == null) return obtenerPedidos();
+        if (fin.isBefore(inicio)) throw new IllegalArgumentException("La fecha final debe ser posterior a la inicial.");
+        return pedidoRepository.findByFechaBetweenOrderByFechaDesc(inicio.atStartOfDay(), fin.atTime(LocalTime.MAX));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Pedido obtenerPedidoCliente(Integer idPedido, String username) {
+        return pedidoRepository.findComprobante(idPedido, username).orElse(null);
     }
 
     private void validarProducto(Producto producto, Integer cantidad) {

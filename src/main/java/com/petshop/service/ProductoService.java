@@ -8,6 +8,8 @@ public interface ProductoService {
     public List<Producto> getProductos();
 
     public List<Producto> getProductosActivos();
+
+    public List<Producto> buscarProductosActivos(String busqueda, Integer idCategoria);
     
     public Producto getProducto(Producto producto);
 

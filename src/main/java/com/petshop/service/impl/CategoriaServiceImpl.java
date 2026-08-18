@@ -22,6 +22,12 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<Categoria> getCategoriasActivas() {
+        return categoriaRepository.findByActivoTrueOrderByDescripcionAsc();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Categoria getCategoria(Categoria categoria) {
         return categoriaRepository.findById(categoria.getIdCategoria()).orElse(null);
     }
