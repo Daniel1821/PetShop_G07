@@ -59,3 +59,13 @@ El reporte de ventas permite exportar los resultados a un archivo CSV. Esto faci
 3. Agregue productos al carrito y finalice una compra.
 4. Consulte **Mis pedidos** y el comprobante.
 5. Inicie sesión como `daniel` para gestionar pedidos y revisar `http://localhost:91/reportes/ventas`.
+
+## Evidencias de roles
+
+Las siguientes capturas muestran el acceso diferenciado de cada usuario de prueba:
+
+| Rol | Evidencia |
+|---|---|
+| Administrador | ![Panel de Daniel](docs/evidencias/1.%20admin%20%28Daniel%29.png) |
+| Cliente | ![Panel de Juan](docs/evidencias/2.%20cliente%20%28juan%29.png) |
+| Vendedor | ![Panel de Carlos](docs/evidencias/3.%20vendedor%20%28carlos%29.png) |
