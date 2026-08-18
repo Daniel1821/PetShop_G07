@@ -2,6 +2,7 @@ package com.petshop.controller;
 
 import com.petshop.domain.Pedido;
 import com.petshop.service.PedidoService;
+import com.petshop.service.ReporteService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ReporteController {
     private final PedidoService pedidoService;
-    public ReporteController(PedidoService pedidoService) { this.pedidoService = pedidoService; }
+    private final ReporteService reporteService;
+    public ReporteController(PedidoService pedidoService, ReporteService reporteService) { this.pedidoService = pedidoService; this.reporteService = reporteService; }
     @GetMapping("/reportes/ventas")
     public String ventas(@RequestParam(required = false) LocalDate inicio, @RequestParam(required = false) LocalDate fin, Model model) {
         List<Pedido> pedidos = pedidoService.obtenerPedidosEntre(inicio, fin);
         model.addAttribute("pedidos", pedidos); model.addAttribute("inicio", inicio); model.addAttribute("fin", fin);
         model.addAttribute("total", pedidos.stream().map(Pedido::getTotal).reduce(BigDecimal.ZERO, BigDecimal::add));
+        model.addAttribute("productosMasVendidos", reporteService.productosMasVendidos());
         return "reportes/ventas";
     }
     @GetMapping("/reportes/ventas/csv")

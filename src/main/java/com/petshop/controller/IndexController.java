@@ -13,6 +13,8 @@ public class IndexController {
     public String index(Model model, Authentication authentication) {
         if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
             model.addAttribute("usuarioAutenticado", authentication.getName());
+            model.addAttribute("esAdmin", authentication.getAuthorities().stream()
+                    .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN")));
         }
         return "index";
     }

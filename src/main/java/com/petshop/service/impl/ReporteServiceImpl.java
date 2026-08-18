@@ -1,0 +1,3 @@
+package com.petshop.service.impl;
+import com.petshop.repository.DetallePedidoRepository; import com.petshop.repository.ProductoVendido; import com.petshop.service.ReporteService; import java.util.List; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional;
+@Service public class ReporteServiceImpl implements ReporteService { private final DetallePedidoRepository detalles; public ReporteServiceImpl(DetallePedidoRepository detalles){this.detalles=detalles;} @Override @Transactional(readOnly=true) public List<ProductoVendido> productosMasVendidos(){return detalles.findProductosMasVendidos();} }
